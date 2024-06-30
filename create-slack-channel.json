@@ -1,0 +1,57 @@
+{
+    "meta": {
+        "instanceId": "b627e1606d7058e2d3c8ede348c99f9d641464e4dc0f79c35e3e28b7e0ad9a2a"
+    },
+    "nodes": [
+        {
+            "parameters": {
+                "authentication": "oAuth2",
+                "resource": "channel",
+                "channelId": "boomerang10"
+            },
+            "id": "ab2026db-f275-4771-ae92-bcbccccc98c9",
+            "name": "Slack1",
+            "type": "n8n-nodes-base.slack",
+            "typeVersion": 2.2,
+            "position": [
+                820,
+                120
+            ],
+            "credentials": {
+                "slackOAuth2Api": {
+                    "id": "ImcXEBRDaocH9sXy",
+                    "name": "Slack account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "path": "846c0a45-8455-4e21-9321-12c878d20ea0",
+                "options": {}
+            },
+            "id": "574ac3dc-8f05-416c-b9ef-56760993f544",
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 2,
+            "position": [
+                600,
+                140
+            ],
+            "webhookId": "846c0a45-8455-4e21-9321-12c878d20ea0"
+        }
+    ],
+    "connections": {
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "Slack1",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "pinData": {}
+}

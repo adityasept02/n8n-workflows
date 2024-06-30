@@ -1,0 +1,83 @@
+{
+    "meta": {
+        "instanceId": "b627e1606d7058e2d3c8ede348c99f9d641464e4dc0f79c35e3e28b7e0ad9a2a"
+    },
+    "nodes": [
+        {
+            "parameters": {
+                "authentication": "oAuth2",
+                "resource": "channel",
+                "operation": "getAll",
+                "returnAll": true,
+                "filters": {}
+            },
+            "id": "e8fd899f-3452-47fd-8eea-7e044a49751a",
+            "name": "Slack",
+            "type": "n8n-nodes-base.slack",
+            "typeVersion": 2.2,
+            "position": [
+                900,
+                280
+            ],
+            "credentials": {
+                "slackOAuth2Api": {
+                    "id": "ImcXEBRDaocH9sXy",
+                    "name": "Slack account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "jsCode": "const workflowData = $getWorkflowStaticData('global');\nconst input = $input.all()[0].json;\n\n\n\nreturn workflowData;"
+            },
+            "id": "7a552827-862d-4f67-b978-d04ce288a1b7",
+            "name": "Code",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1240,
+                320
+            ]
+        },
+        {
+            "parameters": {
+                "path": "df7d5fb4-f330-4238-8423-4dd06da0ac92",
+                "options": {}
+            },
+            "id": "0d709a42-4d9d-405c-a70b-d4295b3d695c",
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 2,
+            "position": [
+                620,
+                320
+            ],
+            "webhookId": "df7d5fb4-f330-4238-8423-4dd06da0ac92"
+        }
+    ],
+    "connections": {
+        "Slack": {
+            "main": [
+                [
+                    {
+                        "node": "Code",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "Slack",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "pinData": {}
+}

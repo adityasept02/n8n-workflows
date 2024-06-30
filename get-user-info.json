@@ -1,0 +1,89 @@
+{
+    "meta": {
+        "instanceId": "b627e1606d7058e2d3c8ede348c99f9d641464e4dc0f79c35e3e28b7e0ad9a2a"
+    },
+    "nodes": [
+        {
+            "parameters": {
+                "authentication": "oAuth2",
+                "resource": "user",
+                "user": {
+                    "__rl": true,
+                    "value": "U078MJ593PD",
+                    "mode": "list",
+                    "cachedResultName": "21je0051"
+                }
+            },
+            "id": "f25115b7-f34d-4371-861b-3840372a1266",
+            "name": "Slack",
+            "type": "n8n-nodes-base.slack",
+            "typeVersion": 2.2,
+            "position": [
+                900,
+                140
+            ],
+            "credentials": {
+                "slackOAuth2Api": {
+                    "id": "ImcXEBRDaocH9sXy",
+                    "name": "Slack account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "authentication": "oAuth2",
+                "resource": "user",
+                "operation": "getAll",
+                "returnAll": true
+            },
+            "id": "dbdd2801-5f83-4292-a314-8246ce9ae83a",
+            "name": "Slack1",
+            "type": "n8n-nodes-base.slack",
+            "typeVersion": 2.2,
+            "position": [
+                920,
+                -80
+            ],
+            "credentials": {
+                "slackOAuth2Api": {
+                    "id": "ImcXEBRDaocH9sXy",
+                    "name": "Slack account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "path": "77ca9484-9d28-48b5-87fe-dc4ec5bdb300",
+                "options": {}
+            },
+            "id": "324bbebf-a45f-4dcd-a254-7606cb665648",
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 2,
+            "position": [
+                500,
+                20
+            ],
+            "webhookId": "77ca9484-9d28-48b5-87fe-dc4ec5bdb300"
+        }
+    ],
+    "connections": {
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "Slack1",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "Slack",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "pinData": {}
+}

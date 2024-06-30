@@ -1,0 +1,60 @@
+{
+    "meta": {
+        "instanceId": "b627e1606d7058e2d3c8ede348c99f9d641464e4dc0f79c35e3e28b7e0ad9a2a"
+    },
+    "nodes": [
+        {
+            "parameters": {},
+            "id": "72b6756f-d703-460c-bd9b-a1c12aa228f7",
+            "name": "When clicking ‘Test workflow’",
+            "type": "n8n-nodes-base.manualTrigger",
+            "typeVersion": 1,
+            "position": [
+                620,
+                220
+            ]
+        },
+        {
+            "parameters": {
+                "authentication": "oAuth2",
+                "resource": "channel",
+                "operation": "member",
+                "channelId": {
+                    "__rl": true,
+                    "value": "C07909RJKPB",
+                    "mode": "list",
+                    "cachedResultName": "boomerang1"
+                },
+                "returnAll": true
+            },
+            "id": "fee85d59-e578-4ec2-a870-ca7d86093b4c",
+            "name": "Slack",
+            "type": "n8n-nodes-base.slack",
+            "typeVersion": 2.2,
+            "position": [
+                900,
+                220
+            ],
+            "credentials": {
+                "slackOAuth2Api": {
+                    "id": "ImcXEBRDaocH9sXy",
+                    "name": "Slack account"
+                }
+            }
+        }
+    ],
+    "connections": {
+        "When clicking ‘Test workflow’": {
+            "main": [
+                [
+                    {
+                        "node": "Slack",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "pinData": {}
+}

@@ -1,0 +1,390 @@
+{
+    "meta": {
+        "templateId": "2158",
+        "instanceId": "b627e1606d7058e2d3c8ede348c99f9d641464e4dc0f79c35e3e28b7e0ad9a2a"
+    },
+    "nodes": [
+        {
+            "parameters": {
+                "keepOnlySet": true,
+                "values": {
+                    "string": [
+                        {
+                            "name": "Name",
+                            "value": "={{ $json.summary }}"
+                        },
+                        {
+                            "name": "Start Date",
+                            "value": "={{ $json.start.dateTime }}"
+                        },
+                        {
+                            "name": "Start Time",
+                            "value": "={{ $json.start.dateTime }}"
+                        },
+                        {
+                            "name": "End Date",
+                            "value": "={{ $json.end.dateTime }}"
+                        },
+                        {
+                            "name": "End Time",
+                            "value": "={{ $json.end.dateTime }}"
+                        },
+                        {
+                            "name": "Guests",
+                            "value": "={{ $json.attendees }}"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "57f77b4e-d608-4929-bc49-2dfecff88c8d",
+            "name": "Set",
+            "type": "n8n-nodes-base.set",
+            "position": [
+                1100,
+                588
+            ],
+            "typeVersion": 1
+        },
+        {
+            "parameters": {
+                "operation": "getAll",
+                "calendar": {
+                    "__rl": true,
+                    "value": "adityasept02@gmail.com",
+                    "mode": "list",
+                    "cachedResultName": "adityasept02@gmail.com"
+                },
+                "returnAll": true,
+                "options": {}
+            },
+            "id": "eee04fe7-7f65-4db8-8ad8-7b67197a1f70",
+            "name": "Get meetings",
+            "type": "n8n-nodes-base.googleCalendar",
+            "position": [
+                820,
+                580
+            ],
+            "typeVersion": 1,
+            "credentials": {
+                "googleCalendarOAuth2Api": {
+                    "id": "re9i2KmhsOhua0g2",
+                    "name": "Google Calendar account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "operation": "appendOrUpdate",
+                "documentId": {
+                    "__rl": true,
+                    "mode": "url",
+                    "value": "https://docs.google.com/spreadsheets/d/1YimqC9dKjumctZ0p9Ybl8CfWki6TIY_U7WFSHJootCM/edit?usp=drivesdk",
+                    "__regex": "https:\\/\\/(?:drive|docs)\\.google\\.com(?:\\/.*|)\\/d\\/([0-9a-zA-Z\\-_]+)(?:\\/.*|)"
+                },
+                "sheetName": {
+                    "__rl": true,
+                    "value": "gid=0",
+                    "mode": "list",
+                    "cachedResultName": "Sheet1",
+                    "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1YimqC9dKjumctZ0p9Ybl8CfWki6TIY_U7WFSHJootCM/edit#gid=0"
+                },
+                "columns": {
+                    "mappingMode": "autoMapInputData",
+                    "value": {},
+                    "matchingColumns": [
+                        "Name"
+                    ],
+                    "schema": [
+                        {
+                            "id": "Name",
+                            "displayName": "Name",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "Start Date",
+                            "displayName": "Start Date",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "Start Time",
+                            "displayName": "Start Time",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "End Date",
+                            "displayName": "End Date",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "End Time",
+                            "displayName": "End Time",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "Guests",
+                            "displayName": "Guests",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        }
+                    ]
+                },
+                "options": {
+                    "cellFormat": "USER_ENTERED",
+                    "useAppend": true
+                }
+            },
+            "id": "466cfd0f-011b-42d7-b2b3-db79a791677e",
+            "name": "Google Sheets",
+            "type": "n8n-nodes-base.googleSheets",
+            "typeVersion": 4.3,
+            "position": [
+                1300,
+                740
+            ],
+            "executeOnce": false,
+            "credentials": {
+                "googleSheetsOAuth2Api": {
+                    "id": "n17grGrvh8uTYyrI",
+                    "name": "Google Sheets account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "operation": "toFile",
+                "fileFormat": "csv",
+                "binaryPropertyName": "=data",
+                "options": {
+                    "fileName": "Calendar"
+                }
+            },
+            "name": "Spreadsheet File",
+            "type": "n8n-nodes-base.spreadsheetFile",
+            "position": [
+                1340,
+                460
+            ],
+            "typeVersion": 1,
+            "id": "dffaee04-fe3d-4bf0-9604-7fcf0764ff51"
+        },
+        {
+            "parameters": {
+                "options": {
+                    "fileName": "Data"
+                }
+            },
+            "id": "416704d0-3799-4ff7-8667-27484413205a",
+            "name": "Convert to File",
+            "type": "n8n-nodes-base.convertToFile",
+            "typeVersion": 1.1,
+            "position": [
+                1520,
+                960
+            ]
+        },
+        {
+            "parameters": {
+                "operation": "upload",
+                "bucketName": "calendar-data-02",
+                "fileName": "new2",
+                "additionalFields": {}
+            },
+            "id": "02ede8bb-b648-4edd-8284-bdc080b4f5a9",
+            "name": "AWS S3",
+            "type": "n8n-nodes-base.awsS3",
+            "typeVersion": 2,
+            "position": [
+                1820,
+                740
+            ],
+            "credentials": {
+                "aws": {
+                    "id": "D6xNDzfgzDVdwZBN",
+                    "name": "AWS account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+            },
+            "id": "e75529c8-f4b8-43ec-a862-76966543db0a",
+            "name": "Code",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1580,
+                520
+            ]
+        },
+        {
+            "parameters": {
+                "resource": "calendar",
+                "calendar": {
+                    "__rl": true,
+                    "value": "adityasept02@gmail.com",
+                    "mode": "list",
+                    "cachedResultName": "adityasept02@gmail.com"
+                },
+                "timeMin": "2024-06-13T00:10:00",
+                "timeMax": "2024-06-14T00:10:00",
+                "options": {}
+            },
+            "id": "8d5f125a-494e-4358-8eee-f1a9cd499954",
+            "name": "Google Calendar",
+            "type": "n8n-nodes-base.googleCalendar",
+            "typeVersion": 1.1,
+            "position": [
+                1920,
+                520
+            ],
+            "credentials": {
+                "googleCalendarOAuth2Api": {
+                    "id": "re9i2KmhsOhua0g2",
+                    "name": "Google Calendar account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "path": "12345",
+                "options": {}
+            },
+            "id": "cf6f98f2-eb1e-4b82-8c58-dfe1635bf724",
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 2,
+            "position": [
+                500,
+                680
+            ],
+            "webhookId": "35d6519b-b4f6-48eb-a7e7-3867f85b936a"
+        },
+        {
+            "parameters": {},
+            "id": "0dedad08-1bc6-477c-8b40-750a68ad9e4e",
+            "name": "When clicking ‘Test workflow’",
+            "type": "n8n-nodes-base.manualTrigger",
+            "typeVersion": 1,
+            "position": [
+                520,
+                420
+            ]
+        }
+    ],
+    "connections": {
+        "Set": {
+            "main": [
+                [
+                    {
+                        "node": "Google Sheets",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "Spreadsheet File",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Get meetings": {
+            "main": [
+                [
+                    {
+                        "node": "Set",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Google Sheets": {
+            "main": [
+                [
+                    {
+                        "node": "Convert to File",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Spreadsheet File": {
+            "main": [
+                [
+                    {
+                        "node": "Code",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Convert to File": {
+            "main": [
+                [
+                    {
+                        "node": "AWS S3",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code": {
+            "main": [
+                [
+                    {
+                        "node": "Google Calendar",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "When clicking ‘Test workflow’": {
+            "main": [
+                [
+                    {
+                        "node": "Get meetings",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "pinData": {}
+}
